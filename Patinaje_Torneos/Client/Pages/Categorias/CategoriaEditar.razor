@@ -1,0 +1,25 @@
+﻿@page "/categorias/edit/{id}"
+@inject NavigationManager navigation
+@inject IServicio servicio
+
+<h3 class="featured-title">Modificar categoria</h3>
+<CategoriaFormulario categoria="categoria" categoriaChange="Grabar" Cancelado="Volver"></CategoriaFormulario>
+
+@code {
+    [Parameter] public string id { get; set; }
+    protected HttpClient Http { get; set; }
+
+    Categoria categoria = new Categoria();
+
+    protected override async Task OnInitializedAsync()
+    {
+        categoria = await servicio.Get<Categoria>($"api/categoria/{id}");
+    }
+
+    async Task Grabar(Categoria categoria)
+    {
+        await servicio.Put("api/categoria", categoria);
+        Volver();
+    }
+    void Volver() => navigation.NavigateTo("/categorias");
+}

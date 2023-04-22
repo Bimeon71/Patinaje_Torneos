@@ -1,0 +1,20 @@
+﻿@page "/categorias/create"
+@inject NavigationManager navigation
+@inject IServicio servicio
+
+<h3 class="featured-title">Crear Categoria</h3>
+<CategoriaFormulario categoria="categoria" categoriaChange="Grabar" Cancelado="Volver"></CategoriaFormulario>
+
+@code {
+    protected HttpClient http { get; set; }
+
+    Categoria categoria = new Categoria();
+
+    async Task Grabar(Categoria categoria)
+    {
+        categoria.Id = "1";
+        await servicio.Post("api/categoria", categoria);
+        Volver();
+    }
+    void Volver() => navigation.NavigateTo("/categorias");
+}

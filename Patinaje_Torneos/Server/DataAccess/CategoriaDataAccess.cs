@@ -15,7 +15,7 @@ namespace Patinaje_Torneos.Server.DataAccess
             projectId = "patinaje-adb0e";
             firestoreDb = FirestoreDb.Create(projectId);
         }
-        public async Task<List<Categoria>> GetAllCategoria()
+        public async Task<List<Categoria>> GetAllCategorias()
         {
             try
             {
@@ -110,7 +110,7 @@ namespace Patinaje_Torneos.Server.DataAccess
         }
         protected async Task<string> GetLasId()
         {
-            List<Categoria> categorias = await GetAllCategoria();
+            List<Categoria> categorias = await GetAllCategorias();
             int numCategorias = categorias.Count + 1;
             return numCategorias.ToString();
         }

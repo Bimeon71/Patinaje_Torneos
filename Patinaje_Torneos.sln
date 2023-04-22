@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patinaje_Torneos.Server", "Patinaje_Torneos\Server\Patinaje_Torneos.Server.csproj", "{FE4CE468-73CF-42FA-906B-AE6BDA30FC28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patinaje_Torneos.Server", "Patinaje_Torneos\Server\Patinaje_Torneos.Server.csproj", "{FE4CE468-73CF-42FA-906B-AE6BDA30FC28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patinaje_Torneos.Client", "Patinaje_Torneos\Client\Patinaje_Torneos.Client.csproj", "{F041B1A8-B700-4283-9755-DFA910200849}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patinaje_Torneos.Client", "Patinaje_Torneos\Client\Patinaje_Torneos.Client.csproj", "{F041B1A8-B700-4283-9755-DFA910200849}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patinaje_Torneos.Shared", "Patinaje_Torneos\Shared\Patinaje_Torneos.Shared.csproj", "{641EEE6D-731F-4FC2-8E0F-B905249614B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patinaje_Torneos.Shared", "Patinaje_Torneos\Shared\Patinaje_Torneos.Shared.csproj", "{641EEE6D-731F-4FC2-8E0F-B905249614B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

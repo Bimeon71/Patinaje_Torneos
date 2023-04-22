@@ -18,9 +18,5 @@
     <ProjectReference Include="..\Shared\Patinaje_Torneos.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 
 </Project>

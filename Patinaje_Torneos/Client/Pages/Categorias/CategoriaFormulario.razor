@@ -1,0 +1,39 @@
+﻿<EditForm Model="categoria" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="formulario">
+        <div class="row">
+            <div class="col-8 col-md-8">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label><ValidationMessage For="() => categoria.Nombre" />
+                    <InputText @bind-Value="categoria.Nombre" class="form-control" id="nombre" disabled="@borrar"></InputText>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 col-md-8">
+                <button type="submit" disabled="@grabando" class="btn btn-primary mt-2">
+                    @(grabando ? "Grabando..." : (@borrar ? "Borrar" : "Grabar"))
+                </button>
+                <button type="button" @onclick="Cancelar" disabled="@grabando" class="btn btn-danger mt-2">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter] public Categoria categoria { get; set; }
+    [Parameter] public EventCallback<Categoria> categoriaChange { get; set; }
+    [Parameter] public EventCallback Cancelado { get; set; }
+    [Parameter] public bool borrar { get; set; } = false;
+
+    bool grabando;
+
+    async Task OnValidSubmit()
+    {
+        grabando = true;
+        await categoriaChange.InvokeAsync(categoria);
+    }
+    async Task Cancelar() => await Cancelado.InvokeAsync(null);
+}

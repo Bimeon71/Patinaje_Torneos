@@ -1,0 +1,56 @@
+﻿@page "/categorias"
+@inject IServicio servicio
+@inject NavigationManager navigation
+
+<GenericoLista TItem="Categoria" Titulo="Mantenimiento de Categorias" Items="categorias">
+    <EmptyTemplate>No hay categorias...</EmptyTemplate>
+    <ItemTemplate >        
+        <RadzenButton Icon="add_circle_outline" Style="margin-bottom: 10px; background: #460CAC;" Text="Nuevo" Click="@InsertRow" />
+        <RadzenDataGrid @ref="grid" Data="@categorias" TItem="Categoria"
+            AllowSorting="true" AllowMultiColumnSorting="true"
+            AllowPaging="true" PageSize="12"
+            SelectionMode="DataGridSelectionMode.Single" @bind-Value=@categoriaSeleccionado >
+            <Columns>
+                @*<RadzenDataGridColumn TItem="Categoria" Property="Id" Title="Id" Filterable=false Width="75px"/>*@
+                <RadzenDataGridColumn TItem="Categoria" Property="Nombre" Title="Nombre" />
+                <RadzenDataGridColumn TItem="Categoria" Title="Acciones" Context="sampleBlazorModelsSampleOrder" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+                        <Template Context="categoria">
+                            <RadzenButton Icon="mode_edit" Style="background: #50B2EE" Size="ButtonSize.Medium" Click="@(args => EditRow(categoria.Id))" @onclick:stopPropagation="true"></RadzenButton>
+                        </Template>                    
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Categoria" Context="categoria" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+                        <Template Context="categoria">
+                            <RadzenButton Style="background: #C02D0E" Icon="delete" Size="ButtonSize.Medium" Click="@(args => DeleteRow(categoria.Id))"                                
+                                @onclick:stopPropagation="true" data-bs-toggle="modal" data-bs-target="#exampleModal"></RadzenButton>
+                        </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+            </RadzenDataGrid>
+    </ItemTemplate>
+</GenericoLista>
+
+@code {
+    RadzenDataGrid<Categoria> grid;
+
+    IEnumerable<Categoria> categorias { get; set; }
+    public Categoria categoria;
+    IList<Categoria> categoriaSeleccionado;    
+
+    protected override async Task OnInitializedAsync()
+    {
+        categorias = await servicio.GetList<Categoria>("api/categoria");
+    }
+
+    void InsertRow()
+    {
+        navigation.NavigateTo($"/categorias/create");
+    }
+    void EditRow(string id)
+    {
+        navigation.NavigateTo($"/categorias/edit/{id}");
+    }
+    void DeleteRow(string id)
+    {
+        navigation.NavigateTo($"/categorias/delete/{id}");
+    }
+}
