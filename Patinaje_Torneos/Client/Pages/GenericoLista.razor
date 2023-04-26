@@ -1,0 +1,20 @@
+﻿@typeparam TItem
+
+<h3 class="featured-title">@Titulo</h3>
+
+@if(Items == null)
+{
+    @EmptyTemplate
+}
+else
+{
+    @ItemTemplate
+}
+
+@code {
+    [Parameter] public string Titulo { get; set; } = "";
+    [Parameter] public IEnumerable<TItem> Items { get; set; } = null;
+    [Parameter] public RenderFragment EmptyTemplate { get; set; }
+    [Parameter] public RenderFragment ItemTemplate { get; set; }
+
+}
