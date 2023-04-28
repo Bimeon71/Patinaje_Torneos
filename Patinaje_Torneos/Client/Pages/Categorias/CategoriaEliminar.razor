@@ -13,12 +13,12 @@
 
     protected override async Task OnInitializedAsync()
     {
-        categoria = await servicio.Get<Categoria>($"api/categoria/{id}");
+        categoria = await servicio.Get<Categoria>($"api/categoria/byId/{id}");
     }
 
     async Task Grabar()
     {
-        await servicio.Delete($"api/categoria/{id}");
+        await servicio.Delete($"api/categoria/eliminar/{id}");
         Volver();
     }
     void Volver() => navigation.NavigateTo("/categorias");

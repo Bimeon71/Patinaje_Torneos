@@ -33,7 +33,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-eKuoexYmU5fss3wqzGlKeYDMkCEY4uyD6mVSYStxdo0=",
+      "hash": "sha256-53kFpUpNl+KfMp0FRO3OXtRqSGk5gOyZ3AnUJiWA2W4=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -193,7 +193,7 @@
       "url": "_framework\/Newtonsoft.Json.dll"
     },
     {
-      "hash": "sha256-xryyzlMy6B64GAoU5M+59YZCDBZteuhBsV0\/6zRXAHw=",
+      "hash": "sha256-tK4gy0Ew\/R0RliRIII3o49JsxM92GUgjREmBIUbSvs4=",
       "url": "_framework\/Patinaje_Torneos.Client.dll"
     },
     {
@@ -521,7 +521,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-IWtpdRaDLPuxopbmqWXHGldHsT5bUOSpGD72FHLQq5Y=",
+      "hash": "sha256-65TOeQPxcAQbx+EL85mysIWw1vgRI2LfqsTtyZMnn8I=",
       "url": "index.html"
     },
     {
@@ -661,5 +661,5 @@
       "url": "_content\/Radzen.Blazor\/Radzen.Blazor.js"
     }
   ],
-  "version": "7OWFHWOf"
+  "version": "Wl1nCiC8"
 };

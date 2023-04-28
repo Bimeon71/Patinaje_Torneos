@@ -10,28 +10,28 @@ namespace Patinaje_Torneos.Server.Controllers
     {
         CategoriaDataAccess categoriaDA = new CategoriaDataAccess();
 
-        [HttpGet]
+        [HttpGet("all")]
         public Task<List<Categoria>> GetAll()
         {
             return categoriaDA.GetAllCategorias();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("byId/{id}")]
         public Task<Categoria> GetId(string id)
         {
             return categoriaDA.GetCategoriaId(id);
         }
-        [HttpPost]
+        [HttpPost("insertar")]
         public Task<Categoria> PostCategoria([FromBody] Categoria categoria)
         {
             return categoriaDA.AddCategoria(categoria);
         }
-        [HttpPut]
+        [HttpPut("modificar")]
         public async Task PutCategoria([FromBody] Categoria categoria)
         {
             await categoriaDA.UpdateCategoria(categoria);
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("eliminar/{id}")]
         public async Task DeleteCategoria(string id)
         {
             await categoriaDA.DeleteCategoria(id);

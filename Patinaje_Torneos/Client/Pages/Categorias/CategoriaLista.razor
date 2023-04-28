@@ -38,7 +38,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        categorias = await servicio.GetList<Categoria>("api/categoria");
+        categorias = await servicio.GetList<Categoria>("api/categoria/all");
     }
 
     void InsertRow()
