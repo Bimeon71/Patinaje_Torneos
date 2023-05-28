@@ -1,9 +1,138 @@
 ﻿@page "/"
+@inject NavigationManager navigation
 
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<RadzenTemplateForm Data="this">
+    <div class="container-fluid">
+    <div class="rz-p-12 rz-text-align-center">
+            <RadzenRadioButtonList @bind-Value=@municipioId TValue="int" class="mb-5" Change=@(args => DatosMunicipio(args))>
+            <Items>
+                <RadzenRadioButtonListItem Text="Nájera" Value="1" />
+                <RadzenRadioButtonListItem Text="Haro" Value="2" />
+            </Items>
+        </RadzenRadioButtonList>
+    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <RadzenFieldset Text="Introducir votos">
+                    @foreach (Partido p in partidos)
+                    {
+                        <div class="row">
+                            <div class="col-md-2 align-items-start d-flex">
+                                <RadzenLabel Text="@p.Nombre" />
+                            </div>
+                            <div class="col-md-4">
+                                <RadzenNumeric Style="width:100%" Name="Nombre" @bind-Value="p.Votos" />
+                            </div>
+                        </div>
+                    }
+                    <br />
+                    <RadzenButton Click="Resultados" Text="Calcular escaños" Shade="Shade.Lighter" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+                    <RadzenButton Click="LimpiarVotos" Text="Inicializar" Shade="Shade.Lighter" ButtonStyle="ButtonStyle.Dark"></RadzenButton>
+                </RadzenFieldset>
+            </div>
+            <div class="col-md-6">
+                <RadzenFieldset Text="Escaños">
+                    @foreach (Partido p in partidos)
+                    {
+                        <div class="row">
+                            <div class="col-md-2 align-items-start d-flex">
+                                <RadzenLabel Text="@p.Nombre" />
+                            </div>
 
-Welcome to your new app.
+                            <div class="col-md-4">
+                                <RadzenNumeric Style="width:100%" Name="Nombre" @bind-Value="p.Escanios" />
+                            </div>
+                        </div>
+                    }
+                    <br />
+                    <RadzenButton Click="LimpiarEscanios" Text="Inicializar" Shade="Shade.Lighter" ButtonStyle="ButtonStyle.Dark"></RadzenButton>
+                </RadzenFieldset>
+            </div>
+        </div>
+    </div>
+</RadzenTemplateForm>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    int municipioId = 1;
+    int numEscanios = 13;
+    List<Partido> partidos = new List<Partido>();    
+
+    void DatosMunicipio(int id)
+    {
+        if (id == 1){
+            numEscanios = 13;    
+            partidos = new List<Partido>()
+            {
+                new Partido() { MunicipioId = 1, Id = 1, Nombre = "PSOE", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 2, Nombre = "PP", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 3, Nombre = "Por la Rioja", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 4, Nombre = "Riojano +", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 5, Nombre = "U.P.", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 6, Nombre = "VOX", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 7, Nombre = "Nájera CR", Votos = 0, Escanios = 0 },
+            };
+        }
+        else {
+            numEscanios = 17;
+            partidos = new List<Partido>()
+            {
+                new Partido() { MunicipioId = 1, Id = 1, Nombre = "PSOE", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 2, Nombre = "PP", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 3, Nombre = "CS", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 4, Nombre = "UP", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 5, Nombre = "PR+", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 6, Nombre = "VOX", Votos = 0, Escanios = 0 },
+                new Partido() { MunicipioId = 1, Id = 7, Nombre = "PACMA", Votos = 0, Escanios = 0 },
+            };
+        }
+    }
+    void Resultados()
+    {
+        int numPartidos = partidos.Count();
+
+        for (int i = 0; i < numEscanios; i++)
+        {
+            // Calculamos los valores con la fórmula
+            int maximo = 0;
+            int partidoId = 0;
+            for (int j = 0; j < numPartidos; j++)
+            {
+                Partido partido = partidos[j]; // await GetById(municipioId, j + 1);
+                int votos = partido.Votos / (partido.Escanios + 1);
+                if (votos > maximo)
+                {
+                    maximo = votos;
+                    partidoId = j;  // + 1;
+                }
+            }
+            // Sumar escaño al partidoId
+            Partido p = partidos[partidoId];    /// await GetById(municipioId, partidoId);
+            p.Escanios++;
+        }
+    }
+
+    void LimpiarEscanios()
+    {
+        for (int j = 0; j < partidos.Count(); j++)
+        {
+            partidos[j].Escanios = 0;
+        }
+    }
+    void LimpiarVotos()
+    {
+        for (int j = 0; j < partidos.Count(); j++)
+        {
+            partidos[j].Votos = 0;
+        }
+    }
+
+    public class Partido
+    {
+        public int MunicipioId { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public int Votos { get; set; }
+        public int Escanios { get; set; }
+    }
+}
