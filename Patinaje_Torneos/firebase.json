@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "release/wwwroot",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
